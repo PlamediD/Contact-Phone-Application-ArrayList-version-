@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Scanner;
 
@@ -94,10 +95,9 @@ public class Driver {
 					
 				}
 				else if(answer.equalsIgnoreCase("L")||answer.equalsIgnoreCase("list")) {
-					ListIterator<Contact> iterator=arrayList.listIterator();
 					int x=1;
-					while(iterator.hasNext()){
-						System.out.println(x+". "+iterator.next().firstName+" "+iterator.next().lastName+" "+iterator.next().phoneNumber);
+					for(Contact element : arrayList) {
+						System.out.println(x+"."+element.firstName+" "+element.lastName);
 						x++;
 					}
 					System.out.println();
@@ -115,12 +115,12 @@ public class Driver {
 					String[] splitSearchName=nameSearch.split(" ");
 					String firstName=splitSearchName[0].toUpperCase();
 					String lastName=splitSearchName[1].toUpperCase();
-					ListIterator<Contact> iterator=arrayList.listIterator();
-					while(iterator.hasNext()) {
-						if(iterator.next().firstName.equalsIgnoreCase(firstName)&&iterator.next().lastName.equalsIgnoreCase(lastName)) {
-							System.out.println("phone number: "+iterator.next().phoneNumber);
-						}
+					for( Contact element: arrayList){
+						if(firstName.equalsIgnoreCase(element.firstName)&& lastName.equalsIgnoreCase(element.lastName)) {
+							System.out.println("phone number: "+element.phoneNumber);
+						}	
 					}
+					
 					System.out.println(prompt);
 					answer=sc.nextLine();
 					
@@ -132,14 +132,13 @@ public class Driver {
 					String[] splitDeleteName=deleteName.split(" ");
 					String firstName=splitDeleteName[0].toUpperCase();
 					String lastName=splitDeleteName[1].toUpperCase();
-					ListIterator<Contact> iterator=arrayList.listIterator();
-					while(iterator.hasNext()) {
-						if(iterator.next().firstName.equalsIgnoreCase(firstName)&&iterator.next().lastName.equalsIgnoreCase(lastName)) {
-							arrayList.remove(iterator.next());
-							
+					int index=0;
+					for(Iterator<Contact> person=arrayList.iterator();person.hasNext();) {
+						Contact p=person.next();
+						if(p.firstName.equalsIgnoreCase(firstName)&& p.lastName.equalsIgnoreCase(lastName)) {
+							arrayList.remove(p);
 						}
 					}
-					
 					//arrayList.listIterator();
 					System.out.println(prompt);
 					answer=sc.nextLine();
