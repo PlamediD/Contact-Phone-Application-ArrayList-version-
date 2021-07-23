@@ -133,17 +133,18 @@ public class Driver {
 					String firstName=splitDeleteName[0].toUpperCase();
 					String lastName=splitDeleteName[1].toUpperCase();
 					int index=0;
-					for(Iterator<Contact> person=arrayList.iterator();person.hasNext();) {
-						Contact p=person.next();
-						if(p.firstName.equalsIgnoreCase(firstName)&& p.lastName.equalsIgnoreCase(lastName)) {
-							arrayList.remove(p);
+					for(Contact element: arrayList) {
+						if(firstName.equalsIgnoreCase(element.firstName)&& lastName.equals(element.lastName)) {
+							index=arrayList.indexOf(element);
 						}
 					}
-					//arrayList.listIterator();
+				
+					arrayList.remove(index);
+					System.out.println("The contact has been deleted");
 					System.out.println(prompt);
 					answer=sc.nextLine();
-					
+				}
+		
 			}
 		}
 	}
-}
